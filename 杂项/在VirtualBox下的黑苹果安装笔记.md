@@ -22,11 +22,13 @@ VBoxManage setextradata MacOS10.11 "VBoxInternal/Devices/smc/0/Config/GetKeyFrom
 ```
 3. 接下来就是仿照[这篇教程](https://blog.csdn.net/chy555chy/article/details/51407410)的第六步及之后的几个步骤。
 
+<hr />
+
 打开虚拟机后，默认的分辨率有点小，这个苹果用起来有点憋屈。可以通过一下命令来调整分辨率。
 ```shell
 VBoxManage setextradata "MacOS10.11" "VBoxInternal2/EfiGraphicsResolution" 你要设置的分辨率
 ```
-** 注意`你要设置的分辨率`是要设置成以下格式`数字x数字`，中间的x是小写字母x。**
+__ 注意`你要设置的分辨率`是要设置成以下格式`数字x数字`，中间的x是小写字母x。 __ <br/>
 参考例子：将苹果的分辨率设置为1366*768
 ```shell
 VBoxManage setextradata "MacOS10.11" "VBoxInternal2/EfiGraphicsResolution" 1366x768
