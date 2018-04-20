@@ -28,7 +28,7 @@ VBoxManage setextradata MacOS10.11 "VBoxInternal/Devices/smc/0/Config/GetKeyFrom
 ```shell
 VBoxManage setextradata "MacOS10.11" "VBoxInternal2/EfiGraphicsResolution" 你要设置的分辨率
 ```
-__ 注意`你要设置的分辨率`是要设置成以下格式`数字x数字`，中间的x是小写字母x。 __ <br/>
+__注意`你要设置的分辨率`是要设置成以下格式`数字x数字`，中间的x是小写字母x __ <br/>
 参考例子：将苹果的分辨率设置为1366*768
 ```shell
 VBoxManage setextradata "MacOS10.11" "VBoxInternal2/EfiGraphicsResolution" 1366x768
