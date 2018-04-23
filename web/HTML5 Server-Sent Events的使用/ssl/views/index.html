@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>SSE</title>
+</head>
+<body>
+<div id="result"></div>
+<script>
+  if (!!window.EventSource) {
+    var source = new EventSource('/stream');
+    source.addEventListener('open', open);
+    source.addEventListener('connecttime', connecttime); // 监听自定义事件
+    source.addEventListener('message', message); // 监听默认事件
+    source.addEventListener('error', error);
+
+    function open() {
+      console.log('SSE open', '连接已建立');
+    }
+
+    function message(event) {
+      console.log('SSE message', event.data);
+    }
+
+    // 自定义事件
+    function connecttime(event) {
+      console.log('SSE connecttime', event.data);
+    }
+
+    function error(ev) {
+      console.log('SSE error', '错误了');
+    }
+  }
+</script>
+</body>
+</html>
