@@ -3,7 +3,7 @@
 - [函数声明提升](#函数声明提升)
 - [可继承样式](#可继承样式)
 - [标准W3C标准盒子和IE盒子](#标准W3C标准盒子和IE盒子)
-  - [box-sizing 属性](#box-sizing 属性)
+  - [box-sizing属性](#box-sizing属性)
 - [Egg.js](#Egg.js)
 - [箭头函数](#箭头函数)
 - [事件](#事件)
@@ -121,7 +121,7 @@ IE盒子的真正宽度为：**margin-left+width+margin-right**;
 
 可以使用`<!DOCTYPE html>`来告诉所有的浏览器采用标准W3C标准盒子模型。
 
-## box-sizing 属性
+## box-sizing属性
 
 用于改变元素的CSS盒子模型。
 
