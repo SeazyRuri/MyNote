@@ -8,16 +8,94 @@
 - [箭头函数](#箭头函数)
 - [事件](#事件)
 - [原型继承链](#原型继承链)
+- [浏览器兼容](#浏览器兼容)
+
+# 浏览器兼容
+
+最简单的兼容方式禁用IE8及其以下版本的IE运行，提醒更换或更新浏览器。若条件不允许才考虑以下事项
+
+## 浏览器内核
+
+浏览器内核分为Trident、Gecko、Webkit、Blink还有微软新出的Edge
+
+现在使用Webkit和Blink的有Chrome、Safari、Opera
+
+FireFox使用的是Gecko
+
+Trident是IE在用
+
+Edge是微软的Edge浏览器的内核
+
+## CSS
+
+* 使用`css hack`来兼容IE6/7/8
+
+* 点击过后的超链接的伪类`hover`和`active`样式无效，原因是因为样式被覆盖了，正确的方式应该是`:link`、`:visited`、`:hover`、`:active`
+
+  * `:link`：还未被访问的
+  * `:visited`：已经访问的
+  * `:hover`：有鼠标悬浮的
+  * `:active`：鼠标按下超链接时的
+
+* IE下的`z-index`问题：在设置定位属性的元素上，使用`z-index`不会按照标准规范，会导致页面错乱。这是因为IE下的元素的`z-index`是基于元素的层级关系，而不是自身的z-index。
+
+* 不同浏览器之间的`margin`和`padding`不同，使用通配符`*{margin:0;padding:0}`
+
+* 图片或者是`display:inline-box`的块状结构之间有间隙，这种的主要原因是因为浏览器对空白符（空格、回车、换行等）的处理是保留一个空位，当代码中元素之间有空白符都会产生间隙。解决办法我想到的有两种：
+
+  * 由于使用因为有空白符，把所以元素之间的空白符都去掉就可以了
+
+  ```html
+  <!-- 图片之间有间隙的 -->
+  <img scr="1.png" />
+  <img scr="2.png" />
+  <img scr="3.png" />
+
+  <!-- 图片之间无间隙的 -->
+  <img scr="1.png" /><img scr="2.png" /><img scr="3.png" />
+  ```
+
+  * 加上`float:left`的样式，通过浮动消除间隙
+
+* IE8及以下版本无法使用`opacity`样式，解决办法
+
+  * ```css
+    opacity{
+    　　　opacity:0.5;
+    　　　filter:alpha(opacity=50);  //filter 过滤器   兼容IE678
+    }
+
+    ```
+
+*  边距重叠问题，使用`BFC`解决
+
+* `cursor:hand` 某些浏览器不支持，统一使用`cursor:pointer`.
+
+* 高度自适应，使用`BFC`
+
+* min-height的兼容问题，使用以下代码
+
+  ```css
+  .test{
+      min-height:100px;
+      height:auto !important;
+      height:100px;
+  }
+  ```
+
+* 两个块级元素，父元素设置了overflow:auto，子元素设置了positive:relative，且高度大于父元素，在IE6/7中子元素会被隐藏，而不是溢出。解决办法：父元素设置positive:relative
+
+
 
 # 原型继承链
 
 摘抄于：https://github.com/KieSun/Blog/issues/2
 
-- Object 是所有对象的爸爸，所有的对象都可以通过`__proto__`来找到它
-- Function 是所有函数的爸爸，所有的函数都可以通过`__proto__`来找到它
-- Function.prototype和Object.prototype是特殊的对象，由浏览器引擎来创建
+- `Object` 是所有对象的爸爸，所有的对象都可以通过`__proto__`来找到它
+- `Function` 是所有函数的爸爸，所有的函数都可以通过`__proto__`来找到它
+- `Function.prototype`和`Object.prototype`是特殊的对象，由浏览器引擎来创建
 - 除了以上两个特殊对象，其他对象都是通过构造器 `new` 出来的
-- 所有函数都有prototype对象，除了Function.prototype.bind()方法创建的函数
+- 所有函数都有`prototype`对象，除了`Function.prototype.bind()`方法创建的函数
 - 所有对象都有`__proto__`属性，用于指向创建它的函数的原型，`__proto__` 将对象和原型连接起来组成了原型链
 
 # 事件
@@ -44,6 +122,10 @@
 - 事件捕获阶段，事件从`document`开始向触发事件的元素传播，遇到注册的捕获事件会触发监听器。
 - 传播到触发事件的元素触发注册的事件
 - 事件冒泡阶段，事件从触发事件的元素向`document`传播，遇到注册的冒泡事件会触发监听器
+
+阻止事件传播：
+
+* 使用事件对象的
 
 ## 事件代理（事件委托）
 
