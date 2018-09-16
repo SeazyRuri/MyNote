@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>JSONP Test</title>
+</head>
+<body>
+    <div id="output"></div>
+</body>
+<script>
+    function jsonp(url,data,callback){
+        let script = document.createElement("script");
+        let _callback = 'jsonpcb'+Math.random().toString(36).substring(2);
+        script.src=`${url}?${querystring(data)}&callback=${_callback}`
+
+        window[_callback] = function(data){
+            callback(data);
+            document.body.removeChild(script);
+            delete window[_callback];
+        }
+        document.body.appendChild(script);
+        function querystring (data){
+            let qs=[];
+            for(let key in data){
+                if(!data.hasOwnProperty(key))return;
+                qs.push(`${key}=${data[key]}`);
+            }
+            return qs.join('&');
+        }
+    }
+    jsonp("http://localhost/jsonp",{a:1,b:2},(data)=>{
+        let str = `${data}<br\/>${JSON.stringify(data)}`;
+        document.getElementById("output").innerHTML=str;
+    })
+</script>
+</html>

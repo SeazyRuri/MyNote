@@ -1,0 +1,13 @@
+{
+  "name": "jsonp",
+  "version": "1.0.0",
+  "private": true,
+  "main": "app.js",
+  "description": "jsonp test",
+  "engines": {
+    "node": "0.12.x"
+  },
+  "dependencies": {
+    "express": "4.13.4"
+  }
+}
